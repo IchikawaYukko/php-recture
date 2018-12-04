@@ -40,10 +40,10 @@ class クラスの名前 {
 }
 
 class VendingMachine{
-    private function $投入金額; //130
-    private function $ポカリ; //10
-    private function $コーラ; //10
-    private function $ビール; //10
+    private $投入金額; //130
+    private $ポカリ; //10
+    private $コーラ; //10
+    private $ビール; //10
     private const 単価 = 120;
 
     public function 投入($money){
