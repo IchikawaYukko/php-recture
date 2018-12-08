@@ -28,8 +28,53 @@ class Dice {
 }
 
 class Dice10 extends Dice {
-
+    public function roll() {
+        $this->result = rand(0,5);
+    }
+    public function get_result() {
+    }
+    private function result(){
+        ('⚀','⚁','⚂','⚃','⚄','⚅');
+    }
 }
+
+//サイコロ表示を漢数字にしてみた
+class Dice10_1 extends Dice {
+    public function roll() {
+        $this->result = rand(1,10);
+    }
+    public function get_result() {
+        $this->resultbox[$this->result];
+    }
+    private function result(){
+        $resultbox = (
+            '1'=>'一',
+            '2'=>'二',
+            '3'=>'三',
+            '4'=>'四',
+            '5'=>'五',
+            '6'=>'六',
+            '7'=>'七',
+            '8'=>'八',
+            '9'=>'九',
+            '10'=>'十'
+        );
+    }
+}
+
+//Dice10だと、サイコロ表示がないとおもったため、Dice6にて課題を作成
+class Dice6_1 extends Dice {
+    public function roll() {
+        $this->result = rand(0,5);
+    }
+    public function get_result() {
+        $this->resultbox[$this->result];
+    }
+    private function result(){
+        $resultbox = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+    }
+}
+
 
 class Dice6 extends Dice {
     public function roll($type = 6) {  // dice() 関数定義 (引数を省略した場合のデフォルト値は6)
