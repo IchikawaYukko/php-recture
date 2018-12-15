@@ -32,34 +32,33 @@ class Dice {
         return $this->result;
     }
 }
-
 //サイコロ表示を漢数字にしてみた
 class Dice10 extends Dice {
     public function __construct() {
         $this->side = 10;
     }
-
-
     public function get_result_kansuji() {
         $resultbox = ['一', '二', '三'];
-        $resultbox[$n-1]; // TODO 宿題
+        // TODO 宿題 $resultbox[$n-1]; 
         //$this->result; //これを使わないといけない
-        return $resultbox[$this->result];
+        return $resultbox[$this->result-1];
     }
 }
-// あはっｗｗ おけっ、おやすみー、またらいしうー
-// upよろ、おやすみ←けしてねｗ←けすわｗ
-
-// LoadedDice -> Dice6 -> Dice (クラス継承順)
-class LoadedDice {  // 変調ダイス
+class LoadedDice extends Dice6_1 {  // 変調ダイス
     public function roll() {    // rollを上書きする
         // ここを作るだけ
         // rand() を使いましょう
         // rand()の結果を一旦何かに入れて、それから
         // ごにょごにょして、$this->resultに代入しましょう
+        $a= rand(0,1);
+        if($a == 0){
+            $this->result = 0;
+        }
+        if else($a == 1) {
+            $this->result = rand(1,5);
+        }
     }
 }
-
 //Dice10だと、サイコロ表示がないとおもったため、Dice6にて課題を作成
 class Dice6_1 extends Dice {
     public function roll() {
