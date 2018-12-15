@@ -1,5 +1,4 @@
 <?php
-
 // やること
 
 // 要件定義(何を作るのか)
@@ -18,47 +17,46 @@ $d = new Dice6();
 $d->roll();
 echo $d->get_result();
 
+$d10 = new Dice10();
+$d10->roll();
+echo $d10->get_result();
+
 class Dice {
-    public function roll() {
-    }
-    public function get_result() {
+    private $side;
+    private $result;
 
-    }
-    private $result;//1,2,3,4,5,6
-}
-
-class Dice10 extends Dice {
     public function roll() {
-        $this->result = rand(0,5);
+        $this->result = rand(1, $this->side);
     }
-    public function get_result() {
-    }
-    private function result(){
-        ('⚀','⚁','⚂','⚃','⚄','⚅');
+    public function get_result() {  //数字
+        return $this->result;
     }
 }
 
 //サイコロ表示を漢数字にしてみた
-class Dice10_1 extends Dice {
-    public function roll() {
-        $this->result = rand(1,10);
+class Dice10 extends Dice {
+    public function __construct() {
+        $this->side = 10;
     }
-    public function get_result() {
-        $this->resultbox[$this->result];
+
+
+    public function get_result_kansuji() {
+        $resultbox = ['一', '二', '三'];
+        $resultbox[$n-1]; // TODO 宿題
+        //$this->result; //これを使わないといけない
+        return $resultbox[$this->result];
     }
-    private function result(){
-        $resultbox = (
-            '1'=>'一',
-            '2'=>'二',
-            '3'=>'三',
-            '4'=>'四',
-            '5'=>'五',
-            '6'=>'六',
-            '7'=>'七',
-            '8'=>'八',
-            '9'=>'九',
-            '10'=>'十'
-        );
+}
+// あはっｗｗ おけっ、おやすみー、またらいしうー
+// upよろ、おやすみ←けしてねｗ←けすわｗ
+
+// LoadedDice -> Dice6 -> Dice (クラス継承順)
+class LoadedDice {  // 変調ダイス
+    public function roll() {    // rollを上書きする
+        // ここを作るだけ
+        // rand() を使いましょう
+        // rand()の結果を一旦何かに入れて、それから
+        // ごにょごにょして、$this->resultに代入しましょう
     }
 }
 
@@ -76,7 +74,7 @@ class Dice6_1 extends Dice {
 }
 
 
-class Dice6 extends Dice {
+/*class Dice6 extends Dice {
     public function roll($type = 6) {  // dice() 関数定義 (引数を省略した場合のデフォルト値は6)
         if($type == 6) {     // もし6面ダイスなら
             $this->result = rand(1, 6);   // 乱数を生成してサイコロをふる
@@ -104,7 +102,7 @@ class Dice6 extends Dice {
                 break;
         }
     }
-}
+}*/
 class LoadedDice extends Dice{
 
 }
