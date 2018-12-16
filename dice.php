@@ -15,11 +15,15 @@ echo "🎲 リロードでサイコロ振れるよ♪<br />";
 
 $d = new Dice6();
 $d->roll();
-echo $d->get_result();
+echo $d->get_result_icon();
 
 $d10 = new Dice10();
 $d10->roll();
 echo $d10->get_result();
+
+$loaded = new LoadedDice();
+$loaded->roll();
+echo $loaded->get_result();
 
 class Dice {
     private $side;
@@ -27,9 +31,16 @@ class Dice {
 
     public function roll() {
         $this->result = rand(1, $this->side);
+        var_dump($this->result);
+        var_dump($this->side);
     }
+
     public function get_result() {  //数字
         return $this->result;
+    }
+
+    private function set_side($side) {
+        $this->side = $side;
     }
 }
 
@@ -38,41 +49,37 @@ class Dice10 extends Dice {
     public function __construct() {
         $this->side = 10;
     }
-
-
     public function get_result_kansuji() {
         $resultbox = ['一', '二', '三'];
-        $resultbox[$n-1]; // TODO 宿題
         //$this->result; //これを使わないといけない
-        return $resultbox[$this->result];
+        return $resultbox[$this->result-1];
     }
 }
-// あはっｗｗ おけっ、おやすみー、またらいしうー
-// upよろ、おやすみ←けしてねｗ←けすわｗ
 
-// LoadedDice -> Dice6 -> Dice (クラス継承順)
-class LoadedDice {  // 変調ダイス
+class LoadedDice extends Dice6 {  // 変調ダイス
     public function roll() {    // rollを上書きする
-        // ここを作るだけ
-        // rand() を使いましょう
-        // rand()の結果を一旦何かに入れて、それから
-        // ごにょごにょして、$this->resultに代入しましょう
+        if(0 == rand(0,1)){
+            $this->result = 0;
+        } else {
+            $this->result = rand(1,5);
+        }
     }
 }
 
 //Dice10だと、サイコロ表示がないとおもったため、Dice6にて課題を作成
-class Dice6_1 extends Dice {
-    public function roll() {
-        $this->result = rand(0,5);
+class Dice6 extends Dice {
+    private $resultbox;
+    
+    public function __construct() {
+        $this->side = 6;
+        $this->resultbox = ['⚀','⚁','⚂','⚃','⚄','⚅'];
     }
-    public function get_result() {
-        $this->resultbox[$this->result];
-    }
-    private function result(){
-        $resultbox = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+    public function get_result_icon() {
+        var_dump($this->resultbox);
+        var_dump($this->result - 1);
+        return $this->resultbox[$this->result - 1];
     }
 }
-
 
 /*class Dice6 extends Dice {
     public function roll($type = 6) {  // dice() 関数定義 (引数を省略した場合のデフォルト値は6)
@@ -103,22 +110,3 @@ class Dice6_1 extends Dice {
         }
     }
 }*/
-class LoadedDice extends Dice{
-
-}
-class Device {
-    public function turn_on() {
-
-    }
-}
-
-class PC extends Device {
-    public function writeDVD() {
-
-    }
-}
-class SmartPhone extends Device {
-    public function shoot() {
-
-    }
-}
